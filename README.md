@@ -2,6 +2,8 @@
 
 A reusable, public-safe framework for building operational intelligence agents for NHS System Coordination Centres (SCCs), integrated care systems, urgent and emergency care teams, acute/community providers, operational control centres and similar public-sector environments.
 
+**Community project / reference framework:** This is an independently developed, reusable reference framework and is not an official NHS England product, national standard or endorsed deployment model. It contains no live NHS data, patient information, local tenant configuration, credentials or production endpoints.
+
 > **Status:** reference framework and implementation accelerator. This repository does **not** contain live NHS data, local tenant configuration, patient information, credentials, production endpoints or a deployable clinical system.
 
 ## What this framework contains
