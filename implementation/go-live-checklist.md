@@ -9,13 +9,19 @@
 ## Data
 - [ ] Source authority agreed.
 - [ ] Data contract approved.
-- [ ] NULL/cadence semantics documented.
+- [ ] Source timestamp timezone/storage semantics documented.
+- [ ] Operational reporting timezone/day boundary configured.
+- [ ] Indicator cadence documented.
+- [ ] NULL/scaffold semantics documented.
+- [ ] Raw-reading vs hourly-selection rule documented.
 - [ ] Staleness threshold configured.
+- [ ] Complete-day summary excludes incomplete current day where intended.
 - [ ] Data-quality monitoring active.
 - [ ] Synthetic/UAT data separated from production.
 
 ## Agent
 - [ ] Source-selection tests pass.
+- [ ] Multiple-readings-per-hour test passes.
 - [ ] Provenance tests pass.
 - [ ] Missing-data tests pass.
 - [ ] Discrepancy tests pass.
@@ -40,6 +46,13 @@
 - [ ] Records-management decision recorded.
 - [ ] UAT approval recorded.
 - [ ] Rollback and incident processes tested.
+
+## Outputs
+- [ ] Position timestamp is visible.
+- [ ] Preparation timestamp is visible where relevant.
+- [ ] Snapshot/live limitation is visible.
+- [ ] Facts, narrative, interpretation and questions remain distinguishable.
+- [ ] Production briefs are not stored in a public repository.
 
 ## Operations
 - [ ] Users trained on limitations.

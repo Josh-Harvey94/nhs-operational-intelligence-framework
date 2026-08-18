@@ -2,19 +2,69 @@
 
 A reusable, public-safe framework for building operational intelligence agents for NHS System Coordination Centres (SCCs), integrated care systems, urgent and emergency care teams, acute/community providers, operational control centres and similar public-sector environments.
 
-> **Status:** reference framework and implementation accelerator. This repository does **not** contain live NHS data, local tenant configuration, patient information, credentials, production endpoints or a deployable clinical system.
+> **Community project / reference framework:** This is an independently developed, reusable reference framework and is not an official NHS England product, national standard or endorsed deployment model. It contains no live NHS data, patient information, local tenant configuration, credentials or production endpoints.
 
 ## What this framework contains
 
-The framework separates operational intelligence into two complementary layers:
+The framework separates operational intelligence into two complementary AI layers, supported by a controlled data pipeline and presentation layer:
 
 1. **Info Manager Agent — data intelligence layer**  
-   Interprets structured operational snapshots using an explicit data contract, provenance rules, NULL handling, like-for-like comparisons, seasonality and signal/noise controls.
+   Interprets structured operational snapshots using an explicit data contract, provenance rules, NULL handling, reporting cadence, like-for-like comparisons, seasonality and signal/noise controls.
 
 2. **System Grip Agent — operational grip, assurance and decision-support layer**  
-   Combines the authoritative quantitative position with narrative evidence from approved collaboration/document sources to identify risks, actions, owners, deadlines, unresolved issues, discrepancies and "grip gaps".
+   Combines the authoritative quantitative position with approved narrative evidence to identify risks, actions, owners, deadlines, unresolved issues, discrepancies and "grip gaps".
+
+3. **Presentation/output layer — human-usable operational products**  
+   Converts the intelligence into concise outputs such as a Start-of-Play brief, handover, meeting preparation pack, action log or executive brief.
 
 The intended output is not a prettier dashboard. It is concise, traceable operational intelligence that helps a human operational lead understand **what changed, what matters, what is unresolved and what needs to happen next**.
+
+## The five-stage pattern
+
+```text
+EXTRACT
+Operational readings are retrieved from approved source systems.
+    ↓
+NORMALISE
+A controlled process creates predictable snapshot and summary data products.
+    ↓
+INTERPRET
+The Info Manager Agent identifies movement, context, signal and emerging risk.
+    ↓
+ASSURE
+The System Grip Agent combines quantitative and narrative evidence and identifies gaps.
+    ↓
+PRESENT
+The result is turned into a human-reviewed operational brief, handover or action product.
+```
+
+This separation is deliberate. Deterministic data preparation should happen before generative interpretation wherever possible.
+
+## Flagship worked example — Start-of-Play Brief
+
+The framework includes a synthetic HTML example showing how the two intelligence layers can come together in one operational product:
+
+[`examples/start-of-play-brief.html`](examples/start-of-play-brief.html)
+
+The pattern is:
+
+```text
+LATEST QUANTITATIVE POSITION
+            +
+RECENT NARRATIVE EVIDENCE
+            ↓
+OPERATIONAL INTERPRETATION
+            ↓
+QUESTIONS TO SECURE
+            ↓
+PRIORITY ACTIONS
+            ↓
+GRIP GAPS
+            ↓
+FIRST-TOUCHPOINT MESSAGE
+```
+
+All example organisations, values, actions and sources are fictional.
 
 ## Design principles
 
@@ -23,6 +73,8 @@ The intended output is not a prettier dashboard. It is concise, traceable operat
 - **Separate fact, narrative, interpretation and absence.**
 - **Point-in-time is not trend:** trend language requires multiple comparable observations.
 - **No silent interpolation:** missing data remains missing.
+- **Raw reading is not necessarily hourly value:** where several readings occur in an interval, apply the documented deterministic selection rule.
+- **Time semantics are explicit:** timestamp storage timezone, reporting timezone and daylight-saving behaviour must be documented.
 - **No patient-identifiable information in generated operational outputs.**
 - **Least privilege:** users and agents should only access sources they are already authorised to use.
 - **Local assurance is mandatory:** information governance, clinical safety, security, DLP, records management and operational ownership remain the deploying organisation's responsibility.
@@ -33,52 +85,92 @@ The intended output is not a prettier dashboard. It is concise, traceable operat
 
 ```mermaid
 flowchart LR
-    A[Operational source systems] --> B[Snapshot / data preparation]
-    B --> C[(Approved structured data store)]
-    C --> D[Info Manager Agent]
-    D --> E[Evidence-based operational brief]
+    A[Operational source systems] --> B[Extract]
+    B --> C[Normalise / snapshot preparation]
+    C --> D[(Approved structured data store)]
 
-    F[Approved narrative sources<br/>email / Teams / notes / documents] --> G[System Grip Agent]
-    C --> G
-    E --> G
-    G --> H[Grip summary<br/>risks / actions / gaps / follow-up]
+    D --> E[Info Manager Agent]
+    E --> F[Data intelligence]
 
-    H --> I[Human operational lead]
-    I --> J[Meeting / handover / escalation / assurance]
+    G[Approved narrative sources<br/>email / Teams / notes / documents] --> H[System Grip Agent]
+    D --> H
+    F --> H
+    H --> I[Operational grip<br/>risks / actions / gaps / assurance]
 
-    K[Governance controls<br/>DLP / access / audit / IG / clinical safety] -.-> C
-    K -.-> D
-    K -.-> G
+    I --> J[Presentation / output layer]
+    J --> K[Start-of-Play brief]
+    J --> L[Handover]
+    J --> M[Meeting preparation]
+    J --> N[Action / assurance log]
+
+    K --> O[Human operational lead]
+    L --> O
+    M --> O
+    N --> O
+
+    P[Governance controls<br/>DLP / access / audit / IG / clinical safety] -.-> D
+    P -.-> E
+    P -.-> H
+    P -.-> J
 ```
 
 The diagram is a **logical** architecture. The two agents can be implemented independently or orchestrated. Do not assume that one agent should automatically call the other unless the local platform, permissions and assurance model support that design.
 
+## Quick start for another organisation
+
+1. Read [`docs/overview.md`](docs/overview.md).
+2. Define local source authority and complete the data dictionary.
+3. Review [`docs/data-contract.md`](docs/data-contract.md) and [`docs/timestamp-and-cadence.md`](docs/timestamp-and-cadence.md).
+4. Adapt the public-safe SQL patterns in [`sql/`](sql/) to local approved source tables **privately**.
+5. Build the snapshot/summary process.
+6. Configure the Info Manager Agent from [`agents/info-manager/`](agents/info-manager/).
+7. Test against synthetic data before using current operational data.
+8. Configure the System Grip Agent from [`agents/system-grip/`](agents/system-grip/).
+9. Review [`governance/`](governance/) and complete local assurance.
+10. Use [`templates/start-of-play-brief.html`](templates/start-of-play-brief.html) or another approved output pattern.
+11. Start read-only and human-reviewed.
+12. Only automate distribution/actions after evidence, ownership and controls are mature.
+
 ## Repository map
 
-- [`docs/`](docs/) — concepts, data contract, source provenance, privacy review and glossary
+- [`docs/`](docs/) — concepts, data contract, timestamp/cadence, provenance, output design and public-safety review
 - [`architecture/`](architecture/) — architecture, trust boundaries and design decisions
-- [`agents/`](agents/) — public-safe instruction templates for both agents
+- [`agents/`](agents/) — public-safe instruction templates and tests
 - [`power-automate/`](power-automate/) — flow specifications and environment-variable patterns
-- [`sql/`](sql/) — optional generic SQL examples and data-contract helpers
-- [`templates/`](templates/) — morning brief, handover, action and grip-gap templates
+- [`sql/`](sql/) — optional generic SQL examples based on real implementation patterns but stripped of local object names
+- [`templates/`](templates/) — morning brief, Start-of-Play, handover, action and grip-gap templates
 - [`sample-data/`](sample-data/) — wholly synthetic data for testing
 - [`governance/`](governance/) — IG, DPIA, clinical safety, access, model-risk and assurance templates
 - [`examples/`](examples/) — synthetic worked outputs
 - [`implementation/`](implementation/) — phased deployment plan and go-live checklist
 - [`tools/`](tools/) — lightweight public-release safety scanner
 
+## Data implementation notes
+
+The public SQL examples model three useful data products:
+
+- **live/current-day raw readings** with a 24-hour scaffold;
+- **previous complete day raw readings**;
+- **long-horizon daily summary** based on complete days only.
+
+The raw extracts intentionally preserve multiple readings within an hour. If the analytical use case requires one value per indicator/hour, apply a documented rule such as **latest timestamp wins** in the deterministic transformation layer or explicitly in the agent logic.
+
+A scaffold row containing NULLs only means that no source reading matched that interval. Whether that means **future/not yet reported**, **expected cadence**, or **unexpected data silence** must be established from the reporting clock and indicator dictionary.
+
 ## Recommended implementation pattern
 
 1. Define the operational questions and accountable owners.
 2. Agree an explicit structured-data contract.
-3. Create a controlled snapshot process.
-4. Build and validate the Info Manager Agent against synthetic and historical test cases.
-5. Add approved narrative sources to the System Grip Agent.
-6. Configure DLP, authentication, permissions and environment separation.
-7. Complete local IG/security/clinical-safety assurance as applicable.
-8. Run user acceptance testing with operational leads.
-9. Start read-only and human-reviewed.
-10. Only automate distribution/actions after evidence, ownership and controls are mature.
+3. Document timestamp storage, reporting timezone and expected cadence.
+4. Create controlled raw snapshot products.
+5. Create deterministic normalisation/summary products.
+6. Build and validate the Info Manager Agent against synthetic and historical test cases.
+7. Add approved narrative sources to the System Grip Agent.
+8. Configure DLP, authentication, permissions and environment separation.
+9. Complete local IG/security/clinical-safety assurance as applicable.
+10. Run user acceptance testing with operational leads.
+11. Start read-only and human-reviewed.
+12. Only automate distribution/actions after evidence, ownership and controls are mature.
 
 See [`implementation/README.md`](implementation/README.md).
 
@@ -100,7 +192,7 @@ See [`power-automate/README.md`](power-automate/README.md).
 ## Safety boundary
 
 This framework is **not**:
-- a real-time operational feed;
+- a real-time operational feed unless explicitly engineered and validated as one;
 - an autonomous incident commander;
 - a clinical decision-support product by default;
 - a substitute for source-system validation;

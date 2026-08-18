@@ -15,8 +15,11 @@ Assume everything committed here can be read, copied and indexed publicly.
 - client secrets, API keys, tokens, certificates or passwords;
 - SQL connection strings or database credentials;
 - private server/database names;
+- production database/schema/table/view names where they expose non-public infrastructure;
+- stored procedure/job names that reveal sensitive internal architecture;
 - production flow exports containing sensitive metadata;
 - unredacted meeting transcripts, chats or emails;
+- completed real operational HTML/email briefs;
 - sensitive escalation routes, on-call contact trees or resilience vulnerabilities;
 - screenshots showing confidential information, usernames, tenant details or browser history;
 - logs containing tokens, request headers or personal data;
@@ -24,15 +27,27 @@ Assume everything committed here can be read, copied and indexed publicly.
 
 Use placeholders such as:
 `[YOUR_SHAREPOINT_SITE_URL]`, `[YOUR_SQL_SERVER]`, `[YOUR_DATABASE]`,
-`[YOUR_DOCUMENT_LIBRARY]`, `[YOUR_DISTRIBUTION_LIST]`,
-`[YOUR_ORGANISATION_NAME]`, `[YOUR_OPERATIONAL_DATA_SOURCE]`.
+`[YOUR_SCHEMA]`, `[YOUR_INDICATOR_VALUES_TABLE]`, `[YOUR_DOCUMENT_LIBRARY]`,
+`[YOUR_DISTRIBUTION_LIST]`, `[YOUR_ORGANISATION_NAME]`,
+`[YOUR_OPERATIONAL_DATA_SOURCE]`.
+
+## Public example rule
+
+When converting a production artefact into a public example:
+- preserve the reusable pattern;
+- replace organisations and people with fictional labels;
+- replace figures with synthetic values;
+- replace internal filenames/source IDs;
+- generalise source object names;
+- remove meeting/escalation details;
+- check HTML source as well as what renders visually.
 
 ## Before publishing a fork
 
 1. Run `python tools/pre_publish_check.py .`.
 2. Search git history, not only the working tree.
 3. Inspect screenshots manually and remove metadata.
-4. Review solution/flow exports before committing.
+4. Review SQL and solution/flow exports before committing.
 5. Confirm sample data is synthetic.
 6. Enable repository secret scanning/push protection where available.
 7. Use a two-person public-release review for NHS/public-sector deployments.

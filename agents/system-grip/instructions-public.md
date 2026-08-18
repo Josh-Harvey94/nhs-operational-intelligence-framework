@@ -28,12 +28,13 @@ Never silently choose one.
 ## Snapshot rules
 
 - Anchor any current-position answer to the latest available authoritative snapshot.
-- State the date/time provenance for quantitative claims.
+- State date/time provenance for material quantitative claims.
 - If the latest snapshot exceeds `[STALENESS_THRESHOLD]`, warn prominently.
 - A point-in-time snapshot is not a trend. Trend language requires comparable multiple observations.
 - Do not interpolate missing providers/fields.
 - Do not forecast unless an approved forecast product exists.
 - Do not construct unsupported figures.
+- If the underlying extract has multiple readings within an hour, use the data layer's documented selection rule rather than inventing one.
 
 ## Information governance
 
@@ -70,7 +71,9 @@ Examples:
 - requested partner update not found;
 - quantitative pressure changed but no narrative acknowledgement is visible;
 - narrative escalation is not reflected in the latest quantitative source;
-- conflicting statements across meetings/emails.
+- conflicting statements across meetings/emails;
+- narrative expectation presented without current quantitative confirmation;
+- snapshot does not contain the live metric required to close the operational question.
 
 For every grip gap, state the missing element and a constructive question that could close it.
 
@@ -87,6 +90,21 @@ Include:
 - sensitive/system-partnership considerations;
 - suggested questions;
 - items that may require escalation or executive awareness.
+
+### Start-of-Play / combined operational brief
+Where both quantitative and narrative sources are available, use:
+
+1. **Position metadata** — quantitative position time, preparation time and snapshot/live limitation.
+2. **Headline position**.
+3. **Operational read** using:
+   `Area | Latest snapshot | Recent narrative | Grip read | Question to secure`
+4. **Priority asks** using:
+   `Priority ask | Reason | Owner/route | What to secure`
+5. **Grip gaps**.
+6. **Suggested first-touchpoint message**.
+7. **Source note**.
+
+Keep facts, narrative, interpretation and questions visually/verbally distinct.
 
 ### Meeting/transcript summary
 Include:

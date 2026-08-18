@@ -1,4 +1,6 @@
--- Generic example: latest observation for each indicator within each hour.
+-- Generic example: deterministic latest observation for each indicator/hour.
+-- Use only when one hourly observation is required by the analytical data contract.
+
 WITH ranked AS (
     SELECT
         *,

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operational Start of Play Brief</title>
+<style>
+:root{--primary:#005eb8;--primary-dark:#003d78;--ink:#1f2937;--muted:#6b7280;--line:#d6dde6;--bg:#f5f7fb;--card:#fff;--red:#b91c1c;--amber:#b45309;--green:#047857}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.42;font-size:14px}.wrap{max-width:1180px;margin:0 auto;padding:22px}header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:24px 28px;border-radius:16px}.meta{display:flex;gap:12px;flex-wrap:wrap}.pill{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 10px;background:rgba(255,255,255,.12)}.warn{margin-top:14px;padding:10px 12px;border-left:5px solid #f59e0b;background:#fff7e6;color:#5b3b00;border-radius:8px}.section{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}h1{margin:0 0 10px;font-size:25px}h2{margin:0 0 12px;color:var(--primary-dark)}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff}.label{font-size:12px;text-transform:uppercase;color:var(--muted);font-weight:700}.big{font-size:24px;font-weight:800;margin:6px 0}.red{color:var(--red)}.amber{color:var(--amber)}.green{color:var(--green)}table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--line);padding:9px 10px;vertical-align:top}th{background:#edf4fb;text-align:left;color:#0f3b63}.message{background:#eef7ff;border:1px solid #b7dcff;border-radius:12px;padding:13px}.foot{font-size:12px;color:#4b5563;border-top:1px solid var(--line);margin-top:14px;padding-top:12px}@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>OPERATIONAL START OF PLAY BRIEF | [YOUR_ORGANISATION_NAME] | [DATE]</h1>
+<div class="meta">
+<span class="pill">Position: [LATEST_QUANTITATIVE_TIMESTAMP]</span>
+<span class="pill">Prepared: [PREPARED_TIMESTAMP]</span>
+<span class="pill">Snapshot-based brief — not a live dashboard</span>
+</div>
+<div class="warn"><strong>Data status:</strong> [STALENESS_OR_DATA_QUALITY_MESSAGE]</div>
+</header>
+
+<section class="section">
+<h2>A. Headline position</h2>
+<p>[ONE_PARAGRAPH_HEADLINE_SEPARATING_QUANTITATIVE_FACT_NARRATIVE_AND_INTERPRETATION]</p>
+<div class="cards">
+<div class="card"><div class="label">Area A</div><div class="big amber">[STATUS]</div><div>[VALUE]</div><small>[TIME]</small></div>
+<div class="card"><div class="label">Area B</div><div class="big red">[STATUS]</div><div>[VALUE]</div><small>[TIME]</small></div>
+<div class="card"><div class="label">Area C</div><div class="big green">[STATUS]</div><div>[VALUE]</div><small>[TIME]</small></div>
+<div class="card"><div class="label">Area D</div><div class="big">[STATUS]</div><div>[VALUE]</div><small>[TIME]</small></div>
+</div>
+</section>
+
+<section class="section">
+<h2>B. Operational read</h2>
+<table>
+<thead><tr><th>Area</th><th>Latest snapshot</th><th>Recent narrative</th><th>Grip read</th><th>Question to secure</th></tr></thead>
+<tbody>
+<tr><td>[AREA]</td><td>[QUANTITATIVE_FACT_WITH_TIMESTAMP]</td><td>[NARRATIVE_FACT_WITH_SOURCE]</td><td>[INTERPRETATION]</td><td>[QUESTION]</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="section">
+<h2>C. Priority asks</h2>
+<table>
+<thead><tr><th>Priority ask</th><th>Reason</th><th>Owner / route visible?</th><th>What to secure</th></tr></thead>
+<tbody>
+<tr><td>[ASK]</td><td>[EVIDENCE]</td><td>[OWNER_OR_NOT_SPECIFIED]</td><td>[REQUIRED_CONFIRMATION]</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="section">
+<h2>D. Grip gaps</h2>
+<ul>
+<li><strong>[GAP TYPE]:</strong> [WHAT_IS_MISSING_AND_WHY_IT_MATTERS]</li>
+</ul>
+</section>
+
+<section class="section">
+<h2>E. Suggested first-touchpoint message</h2>
+<div class="message">[SHORT_HUMAN_USABLE_MESSAGE]</div>
+</section>
+
+<section class="section">
+<h2>F. Source note</h2>
+<p>[QUANTITATIVE_SOURCE_AND_TIMESTAMP]. [NARRATIVE_SOURCE_CLASSES]. Identifiers withheld where applicable. Snapshot-based brief, not a live dashboard.</p>
+<p class="foot">Do not publish completed production briefs in a public repository.</p>
+</section>
+</div>
+</body>
+</html>

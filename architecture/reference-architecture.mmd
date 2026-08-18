@@ -1,14 +1,23 @@
 flowchart LR
-A[Operational source systems] --> B[Snapshot / ETL]
-B --> C[(Approved structured store)]
-C --> D[Info Manager Agent]
-D --> E[Operational intelligence]
-F[Approved narrative sources] --> G[System Grip Agent]
-C --> G
-E --> G
-G --> H[Grip / assurance output]
-H --> I[Human operational lead]
-I --> J[Approved operational action]
-K[Governance / DLP / RBAC / audit] -.-> C
-K -.-> D
-K -.-> G
+A[Operational source systems] --> B[Extract]
+B --> C[Normalise / snapshot preparation]
+C --> D[(Approved structured data store)]
+D --> E[Info Manager Agent]
+E --> F[Data intelligence]
+G[Approved narrative sources] --> H[System Grip Agent]
+D --> H
+F --> H
+H --> I[Operational grip / assurance]
+I --> J[Presentation / output layer]
+J --> K[Start-of-Play brief]
+J --> L[Handover]
+J --> M[Meeting preparation]
+J --> N[Action / assurance log]
+K --> O[Human operational lead]
+L --> O
+M --> O
+N --> O
+P[Governance / DLP / RBAC / audit] -.-> D
+P -.-> E
+P -.-> H
+P -.-> J
