@@ -1,0 +1,3 @@
+EVENT_TIME,SOURCE_TYPE,ORGANISATION,TOPIC,RISK_SUMMARY,ACTION,OWNER_ROLE,DEADLINE,STATUS,CONTAINS_PERSONAL_DATA
+2026-08-18T08:30:00,Meeting note,Provider A,Urgent-care demand,Synthetic demand pressure described,Confirm escalation-area staffing,Duty manager,,Open,False
+2026-08-18T09:05:00,Email,Provider A,Pressure level,Synthetic email reports level 4,Clarify discrepancy,System coordination lead,2026-08-18T10:00:00,Open,False

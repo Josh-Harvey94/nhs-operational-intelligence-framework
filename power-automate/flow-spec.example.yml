@@ -1,0 +1,14 @@
+# Documentation-only specification. Not directly importable into Power Automate.
+flow:
+  name: Create Operational Snapshot
+  trigger: scheduled
+  inputs:
+    source: "[YOUR_OPERATIONAL_DATA_SOURCE]"
+  outputs:
+    live_snapshot: "[LIVE_SNAPSHOT_PATH]"
+    archive: "[ARCHIVE_PATH]"
+  controls:
+    deduplication: latest_timestamp_per_indicator_interval
+    empty_extract_behavior: fail_without_overwriting_last_valid
+    audit_payloads: false
+    least_privilege: true

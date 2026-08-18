@@ -1,0 +1,24 @@
+organisation:
+  name: "[YOUR_ORGANISATION_NAME]"
+  operational_function: "[YOUR_OPERATIONAL_FUNCTION]"
+
+data:
+  source: "[YOUR_OPERATIONAL_DATA_SOURCE]"
+  sharepoint_site: "[YOUR_SHAREPOINT_SITE_URL]"
+  document_library: "[YOUR_DOCUMENT_LIBRARY]"
+  sql_server: "[YOUR_SQL_SERVER]"
+  database: "[YOUR_DATABASE]"
+  stale_after_hours: 24
+  short_horizon_days: 3
+  emerging_risk_consecutive_readings: 3
+
+distribution:
+  group: "[YOUR_DISTRIBUTION_LIST]"
+
+governance:
+  ig_owner_role: "[ROLE]"
+  clinical_safety_owner_role: "[ROLE]"
+  cyber_owner_role: "[ROLE]"
+  operational_owner_role: "[ROLE]"
+
+# Do not add real values to the public repository.

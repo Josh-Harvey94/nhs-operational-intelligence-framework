@@ -1,0 +1,46 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.p12
+*.key
+secrets.*
+credentials.*
+local-config.*
+!local-config.example.yml
+
+# Power Platform / tenant-specific exports
+power-automate/exports/
+solutions/private/
+*.msapp
+
+# Data - public repo permits only sample-data
+data/
+exports/
+live-data/
+production-data/
+transcripts/
+emails/
+meeting-recordings/
+*.bak
+
+# Office temp files
+~$*
+*.tmp
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+.idea/
+
+# Logs
+*.log
